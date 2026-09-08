@@ -1,0 +1,48 @@
+Câu 1: tính đóng gói, access modifiers & từ khoá init
+a) Ý nghĩa của tính đóng gói (Encapsulation):
+- Giúp che giấu chi tiết cài đặt bên trong và bảo vệ dữ liệu của đối tượng khỏi bị truy cập hoặc sửa đổi trái phép từ bên ngoài.
+- Cung cấp các giao diện / phương thức an toàn để tương tác với dữ liệu của đối tượng.
+b) Phân biệt các Access Modifiers:
+- private: Chỉ có thể truy cập bên trong nội bộ của chính lớp đó.
+- protected: Lớp cha chia sẻ nội bộ cho các lớp con kế thừa từ nó, nhưng ẩn với bên ngoài.
+- internal: Có thể truy cập ở bất kỳ đâu trong cùng một assembly (project).
+- public: Có thể truy cập tự do từ bất kỳ đâu (hoàn toàn công khai).
+c) Từ khóa init trong C# 9+:
+- Tác dụng: Dùng trong khai báo Properties để cho phép gán/thết lập giá trị chỉ một lần duy nhất tại thời điểm khởi tạo đối tượng (Object Initializer).
+- Khác biệt so với set: Khác với set cho phép gán lại giá trị nhiều lần trong suốt vòng đời của đối tượng, init biến thuộc tính thành chỉ đọc (read-only) ngay sau khi khởi tạo xong.
+Câu 2: kế thừa tưd khoá base & sealed
+a) Đa kế thừa và Ký tự khai báo:
+- C# không hỗ trợ đa kế thừa đối với Lớp (Class); C# chỉ hỗ trợ Đơn kế thừa (một lớp con chỉ kế thừa từ 1 lớp cha duy nhất).
+- Ký tự được sử dụng để khai báo kế thừa là dấu hai chấm : (Ví dụ: public class NhanVienChinhThuc : NhanVien).
+b) Từ khóa base với Constructor:
+      - trước (sử dụng cú pháp : base(...)), đảm bảo lớp cha được khởi tạo hoàn chỉnh trước khi chạy logic của lớp con.
+c) Tác dụng của từ khóa sealed trước Class:
+      - Dùng để niêm phong lớp, không cho phép bất kỳ lớp nào khác kế thừa từ lớp này (Ví dụ: System.String là một sealed class).
+Câu 3: đa hình, virtual & override 
+a) Sự khác biệt giữa Compile-time và Runtime Polymorphism:
+- Compile-time Polymorphism (Method Overloading): Xảy ra tại thời điểm biên dịch. Các phương thức nằm trong cùng một lớp, có cùng tên nhưng khác nhau về chữ ký (số lượng, kiểu dữ liệu của tham số).
+- Runtime Polymorphism (Method Overriding): Xảy ra tại thời điểm thực thi (runtime). Lớp con ghi đè và cài đặt lại logic mới cho phương thức đã được khai báo ở lớp cha.
+b) Từ khóa sử dụng để ghi đè:
+- Phương thức ở lớp cha phải được đánh dấu bằng từ khóa virtual.
+- Phương thức ở lớp con sử dụng từ khóa override để xác nhận ghi đè và cài đặt logic mới.
+Câu 4: so sánh abstract class và interface
+Tiêu chí	|Abstract class(lớp trừu tượng)	   			|Interface(giao diện)
+Kế thừa	        |Đơn kế thừa(chỉ kế thừa 1 lớp)	   			|Đa kế thừa(thực thi nhiều interface)
+Thành phần	|Chứa field, constructor, method(có/không có thân hàm)	|Signature(C# 8+: có thể chứa default implementation)
+Access modifier |Hỗ trợ private, protected, public			|Mặc định là public
+Quan hệ		|IS-A (bản chất-“là một”				|CAN-DO(năng lực-“có thể làm”)
+
+- Khi nào chọn abstract class thay vì interface?
+- Khi các lớp đối tượng có mối quan hệ bản chất cốt lõi IS-A.
+- Khi cần chi sẻ mã nguồn chung (resable code) giữa các lớp con thông qua các phương thức có thân hàm sẵn.
+- Khi cần sử dụng các thuộc tính dữ liệu(fields), contructor hoặc quản lý truy cập chi tiết bằng cách access midifierd như protected hay private.
+
+Câu 5: extension method & các phương thức linq cốt lõi
+a) Extension Method:
+- Khái niệm: Cho phép thêm phương thức mới vào một lớp đã sẵn có (kể cả các lớp hệ thống như string, int) mà không cần sửa mã nguồn gốc hay sử dụng kế thừa.
+- Điều kiện khai báo: Phương thức phải được định nghĩa bên trong một static class và tham số đầu tiên của phương thức phải có từ khóa this đứng trước kiểu dữ liệu cần mở rộng (Ví dụ: public static bool IsNumber(this string str)).
+b) 3 phương thức LINQ cốt lõi:
+- .Where(x => condition): Lọc danh sách dữ liệu theo điều kiện cho trước.
+- .Select(x => projection): Ánh xạ, biến đổi dữ liệu từ dạng này sang dạng khác.
+- .OrderBy() / .OrderByDescending(): Sắp xếp danh sách dữ liệu theo tiêu chí tăng dần hoặc giảm dần.
+
